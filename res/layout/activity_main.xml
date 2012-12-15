@@ -1,0 +1,55 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity" >
+
+    <TextView
+        android:id="@+id/textSsid"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="50dp"
+        android:layout_toLeftOf="@+id/buttonHandover"
+        android:text="SSID" />
+
+    <EditText
+        android:id="@+id/editSsid"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/textSsid"
+        android:layout_alignBottom="@+id/textSsid"
+        android:layout_toRightOf="@+id/textSsid"
+        android:ems="10"
+        android:inputType="text" />
+
+    <TextView
+        android:id="@+id/textKey"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/editKey"
+        android:layout_alignRight="@+id/textSsid"
+        android:text="Key" />
+
+    <EditText
+        android:id="@+id/editKey"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/editSsid"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/editSsid"
+        android:ems="10"
+        android:inputType="textPassword" />
+
+    <Button
+        android:id="@+id/buttonHandover"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/editKey"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="22dp"
+        android:onClick="onHandover"
+        android:text="@string/btn_handover" />
+
+</RelativeLayout>
