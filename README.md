@@ -1,4 +1,3 @@
 StaticHandoverTest
 ==================
-WEPのWiFi設定をするだけのアプリ。
-NFCは使っていない。
+WPA限定などいろいろあるが、NFCでもやれる。
