@@ -1,5 +1,6 @@
 package com.blogpost.hiro99ma.StaticOverTest;
 
+import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.util.Arrays;
 
@@ -8,6 +9,9 @@ import android.net.wifi.WifiManager;
 import android.nfc.NdefRecord;
 import android.nfc.NdefMessage;
 import android.nfc.NfcAdapter;
+import android.nfc.Tag;
+import android.nfc.tech.Ndef;
+import android.nfc.tech.NfcF;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.app.Activity;
@@ -17,6 +21,7 @@ import android.content.IntentFilter;
 import android.util.Log;
 import android.view.Menu;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -36,6 +41,9 @@ public class MainActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
+		//ソフトキーボードは邪魔
+        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
+		
 		//NFC
         mAdapter = NfcAdapter.getDefaultAdapter(this);
         mPendingIntent = PendingIntent.getActivity(this, 0,
@@ -87,11 +95,14 @@ public class MainActivity extends Activity {
     	
     	Parcelable[] pac = intent.getParcelableArrayExtra(NfcAdapter.EXTRA_NDEF_MESSAGES);
     	if((pac == null) || (pac.length == 0)) {
+    		//Nexus7だとFeliCa LiteでNDEFが113-127byteだと解析に失敗する
+			Toast.makeText(this, "fail 1...", Toast.LENGTH_SHORT).show();
     		return;
     	}
     	
     	NdefRecord[] recs = ((NdefMessage)pac[0]).getRecords();
     	if((recs == null) || (recs.length == 0)) {
+			Toast.makeText(this, "fail 2...", Toast.LENGTH_SHORT).show();
     		return;
     	}
     	
@@ -104,6 +115,9 @@ public class MainActivity extends Activity {
     	
     	if(ret) {
     		wifiConfigWpa2Psk(mSsid, mKey);
+    		Toast.makeText(this, "OK", Toast.LENGTH_SHORT).show();
+    	} else {
+			Toast.makeText(this, "fail 3...", Toast.LENGTH_SHORT).show();
     	}
     }
 
